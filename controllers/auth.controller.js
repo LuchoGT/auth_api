@@ -88,7 +88,26 @@ const loginUser = async(req,res =response)=>{
   }
 }
 
+const revalidarToken = async(req, res = response) => {
+
+  // const uid = req.uid;
+  // const username= req.name;
+
+  const {uid,name} = req;
+
+  //Generar un nuevo JWT y retornarlo en esta peticion
+
+  const token = await generarJWT(uid,name);
+
+  res.json({
+      ok:true,
+      // uid,name,
+      token,
+  })
+};
+
 module.exports = {
     createUser,
-    loginUser
+    loginUser,
+    revalidarToken
 }
